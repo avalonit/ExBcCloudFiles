@@ -23,7 +23,6 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
 
-        //File service REST API: https://docs.microsoft.com/it-it/rest/api/storageservices/file-service-rest-api
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
         azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
 
@@ -33,7 +32,6 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         contentType := '';
         urlCanonicalPath := StrSubstNo('/%1/%2/%3/%4', configuration.AzureFileUsername, configuration.CloudWorkingPath, folderName, fileName);
 
-        // REST API Shared Key https://docs.microsoft.com/en-us/azure/storage/common/storage-rest-api-auth
         charCr := 10;
         newLine := FORMAT(charCr);
         canonicalizedStringToBuild := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, contentType, requestDateString, xmsversion, urlCanonicalPath, newLine);
@@ -48,6 +46,9 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         if client.Get(azureApiEndpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             exit(response.Content().ReadAs(output))
+        end
+        else begin
+            AppInsights.TraceError('ALV AzFile Service API Download Failed');
         end;
     end;
 
@@ -74,7 +75,6 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
 
-        //File service REST API: https://docs.microsoft.com/it-it/rest/api/storageservices/file-service-rest-api
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
         azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
 
@@ -84,7 +84,6 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         contentType := '';
         urlCanonicalPath := StrSubstNo('/%1/%2/%3/%4', configuration.AzureFileUsername, configuration.CloudWorkingPath, folderName, fileName);
 
-        // REST API Shared Key https://docs.microsoft.com/en-us/azure/storage/common/storage-rest-api-auth
         charCr := 10;
         newLine := FORMAT(charCr);
         canonicalizedStringToBuild := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, contentType, requestDateString, xmsversion, urlCanonicalPath, newLine);
@@ -99,6 +98,9 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         if client.Get(azureApiEndpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             exit(response.Content().ReadAs(output))
+        end
+        else begin
+            AppInsights.TraceError('ALV AzFile Service API Download Failed');
         end;
     end;
 
