@@ -30,8 +30,6 @@ codeunit 70659929 "ALV Application Telemetry"
             AppStop.Add(appKey, CurrentDateTime);
     end;
 
-
-
     procedure GetTimeSpan(functionId: Text): Integer
     var
         start: DateTime;

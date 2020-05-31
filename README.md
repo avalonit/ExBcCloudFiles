@@ -2,6 +2,6 @@
 
 SCENARIO
 
-In Business central we need to upload and download Azure Files
+Azure File, Azure Blob and Alibaba Cloud integration in Business Central (with interfaces and telemetry)
 
-https://www.business-central.blog/2020/04/10/send-push-notification-to-mobiles-by-using-webhooks/
+https://businesscentraldotblog.wordpress.com/2020/05/31/azure-file-azure-blob-and-alibaba-cloud-integration-in-business-central-with-telemetry/
