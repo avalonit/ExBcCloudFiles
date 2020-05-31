@@ -2,52 +2,50 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
 {
     procedure Download(folderName: Text; fileName: Text; var output: InStream): Boolean
     var
-        configuration: Record "ALV AzConnector Configuration";
+        config: Record "ALV AzConnector Configuration";
         AppInsights: Codeunit "ALV Application Insights Mgt.";
         AppTelemetry: Codeunit "ALV Application Telemetry";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
-        azureApiEndpoint: Text;
-        urlFolderPart: Text;
-        requestDateString: Text;
-        sharedKeyLite: Text;
-        canonicalizedStringToBuild: Text;
+        endpoint: Text;
+        folder: Text;
+        xmsdate: Text;
+        skLite: Text;
+        canonicalizedStr: Text;
         method: Text;
         xmsversion: Text;
-        urlCanonicalPath: Text;
-        contentType: Text;
-        EncryptionManagement: codeunit "Cryptography Management";
+        canPath: Text;
+        encMgt: codeunit "Cryptography Management";
         newLine: Text;
         charCr: Char;
         telemetryID: Text;
     begin
-        if not configuration.FindFirst() then exit(false);
+        if not config.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
         telemetryID := 'ALV AzFile Service API::Download::' + fileName;
         AppTelemetry.Start(telemetryID);
 
-        urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
-        azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
+        folder := StrSubstNo('%1/%2', folderName, fileName);
+        endpoint := StrSubstNo('%1/%2', config.AzureFileUri, folder);
 
-        requestDateString := GetUTCDate(CurrentDateTime());
+        xmsdate := GetUTCDate(CurrentDateTime());
         method := 'GET';
         xmsversion := GetXmsVersion();
-        contentType := '';
-        urlCanonicalPath := StrSubstNo('/%1/%2/%3/%4', configuration.AzureFileUsername, configuration.CloudWorkingPath, folderName, fileName);
+        canPath := StrSubstNo('/%1/%2/%3/%4', config.AzureFileUsername, config.CloudWorkingPath, folderName, fileName);
 
         charCr := 10;
         newLine := FORMAT(charCr);
-        canonicalizedStringToBuild := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, contentType, requestDateString, xmsversion, urlCanonicalPath, newLine);
-        sharedKeyLite := EncryptionManagement.GenerateBase64KeyedHashAsBase64String(canonicalizedStringToBuild, configuration.AzureBlobToken, 2);
-        sharedKeyLite := StrSubstNo('SharedKeyLite %1:%2', configuration.AzureFileUsername, sharedKeyLite);
+        canonicalizedStr := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, '', xmsdate, xmsversion, canPath, newLine);
+        skLite := encMgt.GenerateBase64KeyedHashAsBase64String(canonicalizedStr, config.AzureBlobToken, 2);
+        skLite := StrSubstNo('SharedKeyLite %1:%2', config.AzureFileUsername, skLite);
 
         client.DefaultRequestHeaders().Clear();
-        client.DefaultRequestHeaders().Add('Authorization', sharedKeyLite);
-        client.DefaultRequestHeaders().Add('x-ms-date', requestDateString);
+        client.DefaultRequestHeaders().Add('Authorization', skLite);
+        client.DefaultRequestHeaders().Add('x-ms-date', xmsdate);
         client.DefaultRequestHeaders().Add('x-ms-version', xmsversion);
 
-        if client.Get(azureApiEndpoint, response) then begin
+        if client.Get(endpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             AppTelemetry.Log(telemetryID);
             exit(response.Content().ReadAs(output))
@@ -59,52 +57,50 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
 
     procedure Download(folderName: Text; fileName: Text; var output: Text): Boolean
     var
-        configuration: Record "ALV AzConnector Configuration";
+        config: Record "ALV AzConnector Configuration";
         AppInsights: Codeunit "ALV Application Insights Mgt.";
         AppTelemetry: Codeunit "ALV Application Telemetry";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
-        azureApiEndpoint: Text;
-        urlFolderPart: Text;
-        requestDateString: Text;
-        sharedKeyLite: Text;
-        canonicalizedStringToBuild: Text;
+        endpoint: Text;
+        folder: Text;
+        xmsdate: Text;
+        skLite: Text;
+        canonicalizedStr: Text;
         method: Text;
         xmsversion: Text;
-        urlCanonicalPath: Text;
-        contentType: Text;
-        EncryptionManagement: codeunit "Cryptography Management";
+        canPath: Text;
+        encMgt: codeunit "Cryptography Management";
         newLine: Text;
         charCr: Char;
         telemetryID: Text;
     begin
-        if not configuration.FindFirst() then exit(false);
+        if not config.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
         telemetryID := 'ALV AzFile Service API::Download::' + fileName;
         AppTelemetry.Start(telemetryID);
 
-        urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
-        azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
+        folder := StrSubstNo('%1/%2', folderName, fileName);
+        endpoint := StrSubstNo('%1/%2', config.AzureFileUri, folder);
 
-        requestDateString := GetUTCDate(CurrentDateTime());
+        xmsdate := GetUTCDate(CurrentDateTime());
         method := 'GET';
         xmsversion := GetXmsVersion();
-        contentType := '';
-        urlCanonicalPath := StrSubstNo('/%1/%2/%3/%4', configuration.AzureFileUsername, configuration.CloudWorkingPath, folderName, fileName);
+        canPath := StrSubstNo('/%1/%2/%3/%4', config.AzureFileUsername, config.CloudWorkingPath, folderName, fileName);
 
         charCr := 10;
         newLine := FORMAT(charCr);
-        canonicalizedStringToBuild := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, contentType, requestDateString, xmsversion, urlCanonicalPath, newLine);
-        sharedKeyLite := EncryptionManagement.GenerateBase64KeyedHashAsBase64String(canonicalizedStringToBuild, configuration.AzureBlobToken, 2);
-        sharedKeyLite := StrSubstNo('SharedKeyLite %1:%2', configuration.AzureFileUsername, sharedKeyLite);
+        canonicalizedStr := StrSubstNo('%1%6%6%2%6%6x-ms-date:%3%6x-ms-version:%4%6%5', method, '', xmsdate, xmsversion, canPath, newLine);
+        skLite := encMgt.GenerateBase64KeyedHashAsBase64String(canonicalizedStr, config.AzureBlobToken, 2);
+        skLite := StrSubstNo('SharedKeyLite %1:%2', config.AzureFileUsername, skLite);
 
         client.DefaultRequestHeaders().Clear();
-        client.DefaultRequestHeaders().Add('Authorization', sharedKeyLite);
-        client.DefaultRequestHeaders().Add('x-ms-date', requestDateString);
+        client.DefaultRequestHeaders().Add('Authorization', skLite);
+        client.DefaultRequestHeaders().Add('x-ms-date', xmsdate);
         client.DefaultRequestHeaders().Add('x-ms-version', xmsversion);
 
-        if client.Get(azureApiEndpoint, response) then begin
+        if client.Get(endpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             AppTelemetry.Log(telemetryID);
             exit(response.Content().ReadAs(output))
@@ -119,7 +115,6 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
     var
         requestDateString: Text;
     begin
-        //UTC: sample Mon, 18 May 2020 08:53:13 GMT
         requestDateString := Format(currentDateTime, 0, '<Weekday Text,3>, <Day> <Month Text> <Year4> <Hours24,2>:<Minutes,2>:<Seconds,2> GMT');
         exit(requestDateString);
     end;
