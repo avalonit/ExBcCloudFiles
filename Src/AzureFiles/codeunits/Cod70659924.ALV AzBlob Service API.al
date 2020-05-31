@@ -13,7 +13,7 @@ codeunit 70659924 "ALV AzBlob Service API" implements "ALV CloudManagementInterf
         if not configuration.FindFirst() then exit(false);
 
         AppInsights.TraceInformation('ALV AzBlob Service API Download Start');
-        telemetryID := 'ALV AzBlob Service API::Download' + blobName;
+        telemetryID := 'ALV AzBlob Service API::Download::' + blobName;
         AppTelemetry.Start(telemetryID);
 
         //GET https://<accountname>.blob.core.windows.net/<container>/<blob>?<sastoken>
@@ -43,7 +43,7 @@ codeunit 70659924 "ALV AzBlob Service API" implements "ALV CloudManagementInterf
         if not configuration.FindFirst() then exit(false);
 
         AppInsights.TraceInformation('ALV AzBlob Service API Download Start');
-        telemetryID := 'ALV AzBlob Service API::Download' + blobName;
+        telemetryID := 'ALV AzBlob Service API::Download::' + blobName;
         AppTelemetry.Start(telemetryID);
 
         //GET https://<accountname>.blob.core.windows.net/<container>/<blob>?<sastoken>

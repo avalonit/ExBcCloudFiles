@@ -24,7 +24,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
     begin
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
-        telemetryID := 'ALV AzFile Service API::Download' + fileName;
+        telemetryID := 'ALV AzFile Service API::Download::' + fileName;
         AppTelemetry.Start(telemetryID);
 
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
@@ -81,7 +81,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
     begin
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
-        telemetryID := 'ALV AzFile Service API::Download' + fileName;
+        telemetryID := 'ALV AzFile Service API::Download::' + fileName;
         AppTelemetry.Start(telemetryID);
 
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
