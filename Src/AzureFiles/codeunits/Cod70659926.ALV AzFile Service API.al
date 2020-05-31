@@ -1,8 +1,9 @@
-codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
+codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterface"
 {
     procedure Download(folderName: Text; fileName: Text; var output: InStream): Boolean
     var
         configuration: Record "ALV AzConnector Configuration";
+        AppInsights: Codeunit "ALV Application Insights Mgt.";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
@@ -20,6 +21,7 @@ codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
         charCr: Char;
     begin
         if not configuration.FindFirst() then exit(false);
+        AppInsights.TraceInformation('ALV AzFile Service API Download Start');
 
         //File service REST API: https://docs.microsoft.com/it-it/rest/api/storageservices/file-service-rest-api
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
@@ -44,6 +46,7 @@ codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
         client.DefaultRequestHeaders().Add('x-ms-version', xmsversion);
 
         if client.Get(azureApiEndpoint, response) then begin
+            AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             exit(response.Content().ReadAs(output))
         end;
     end;
@@ -51,6 +54,7 @@ codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
     procedure Download(folderName: Text; fileName: Text; var output: Text): Boolean
     var
         configuration: Record "ALV AzConnector Configuration";
+        AppInsights: Codeunit "ALV Application Insights Mgt.";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
@@ -68,6 +72,7 @@ codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
         charCr: Char;
     begin
         if not configuration.FindFirst() then exit(false);
+        AppInsights.TraceInformation('ALV AzFile Service API Download Start');
 
         //File service REST API: https://docs.microsoft.com/it-it/rest/api/storageservices/file-service-rest-api
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
@@ -92,6 +97,7 @@ codeunit 70659926 "ALV AzFile Service API" implements CloudManagementInterface
         client.DefaultRequestHeaders().Add('x-ms-version', xmsversion);
 
         if client.Get(azureApiEndpoint, response) then begin
+            AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
             exit(response.Content().ReadAs(output))
         end;
     end;

@@ -25,8 +25,10 @@ table 70659927 "ALV AzConnector Configuration"
         {
         }
 
-
         field(7; "AzureFileUsername"; Text[250])
+        {
+        }
+        field(8; "AppInsightKey"; Text[250])
         {
         }
 

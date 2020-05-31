@@ -51,6 +51,12 @@ page 70659928 "ALV AzConnector Config Setup"
                     Caption = 'Working Path';
                 }
 
+                field("AppInsightKey"; AppInsightKey)
+                {
+                    ApplicationArea = All;
+                    Caption = 'App Insight Key';
+                }
+
 
             }
         }
