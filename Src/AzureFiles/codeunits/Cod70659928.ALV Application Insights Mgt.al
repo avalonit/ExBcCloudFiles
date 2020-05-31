@@ -125,4 +125,5 @@ codeunit 70659928 "ALV Application Insights Mgt."
             AppInsightsSDK.Init(configuration.AppInsightKey);
         end;
     end;
+
 }

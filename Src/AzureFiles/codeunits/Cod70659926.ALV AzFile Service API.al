@@ -4,6 +4,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
     var
         configuration: Record "ALV AzConnector Configuration";
         AppInsights: Codeunit "ALV Application Insights Mgt.";
+        AppTelemetry: Codeunit "ALV Application Telemetry";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
@@ -19,9 +20,12 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         EncryptionManagement: codeunit "Cryptography Management";
         newLine: Text;
         charCr: Char;
+        telemetryID: Text;
     begin
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
+        telemetryID := 'ALV AzFile Service API::Download' + fileName;
+        AppTelemetry.Start(telemetryID);
 
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
         azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
@@ -45,6 +49,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
 
         if client.Get(azureApiEndpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
+            AppTelemetry.Log(telemetryID);
             exit(response.Content().ReadAs(output))
         end
         else begin
@@ -56,6 +61,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
     var
         configuration: Record "ALV AzConnector Configuration";
         AppInsights: Codeunit "ALV Application Insights Mgt.";
+        AppTelemetry: Codeunit "ALV Application Telemetry";
         client: HttpClient;
         response: HttpResponseMessage;
         headers: HttpHeaders;
@@ -71,9 +77,12 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
         EncryptionManagement: codeunit "Cryptography Management";
         newLine: Text;
         charCr: Char;
+        telemetryID: Text;
     begin
         if not configuration.FindFirst() then exit(false);
         AppInsights.TraceInformation('ALV AzFile Service API Download Start');
+        telemetryID := 'ALV AzFile Service API::Download' + fileName;
+        AppTelemetry.Start(telemetryID);
 
         urlFolderPart := StrSubstNo('%1/%2', folderName, fileName);
         azureApiEndpoint := StrSubstNo('%1/%2', configuration.AzureFileUri, urlFolderPart);
@@ -97,6 +106,7 @@ codeunit 70659926 "ALV AzFile Service API" implements "ALV CloudManagementInterf
 
         if client.Get(azureApiEndpoint, response) then begin
             AppInsights.TraceInformation('ALV AzFile Service API Download Completed');
+            AppTelemetry.Log(telemetryID);
             exit(response.Content().ReadAs(output))
         end
         else begin
