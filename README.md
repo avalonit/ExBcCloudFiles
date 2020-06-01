@@ -2,6 +2,6 @@
 
 SCENARIO
 
-Azure File, Azure Blob and Alibaba Cloud integration in Business Central (with interfaces and telemetry)
+Delta Tokens and Deep Inserts: a smart way to use API/ODATA ... A real case with Pepperi and Business Central (part 1)
 
-https://businesscentraldotblog.wordpress.com/2020/05/31/azure-file-azure-blob-and-alibaba-cloud-integration-in-business-central-with-telemetry/
+https://businesscentraldotblog.wordpress.com/2020/06/01/delta-tokens-and-deep-inserts-a-smart-way-to-use-api-odata-a-real-case-with-pepperi-and-business-central-part-1/

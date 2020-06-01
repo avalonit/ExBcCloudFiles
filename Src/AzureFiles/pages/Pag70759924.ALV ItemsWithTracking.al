@@ -4,9 +4,9 @@ page 70759924 "ALV ItemsWithTracking"
     Caption = 'ALVItemsWithTracking';
     APIPublisher = 'ALV';
     APIVersion = 'v2.0';
-    APIGroup = 'ALV';
-    EntityName = 'APP365ALVItem';
-    EntitySetName = 'APP365ALVItems';
+    APIGroup = 'ALVAPI';
+    EntityName = 'ALVItem';
+    EntitySetName = 'ALVItems';
     SourceTable = "Item";
     DelayedInsert = true;
     ChangeTrackingAllowed = true;
