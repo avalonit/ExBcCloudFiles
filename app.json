@@ -1,9 +1,9 @@
 {
   "id": "a7a49c61-7712-400a-9fc5-bc35f8e02af5",
-  "name": "Business Central Cloud Container App Sample",
+  "name": "Business Central Pepperi Connector App Sample",
   "publisher": "Alberto Valenti",
-  "brief": "Business Central Cloud Container App Sample",
-  "description": "Business Central Cloud Container App Sample",
+  "brief": "Business Central Pepperi Connector App Sample",
+  "description": "Business Central Pepperi Connector App Sample",
   "version": "3.0.0.16",
   "privacyStatement": "https://www.business-central.blog",
   "contextSensitiveHelpUrl": "https://www.business-central.blog",
@@ -30,8 +30,8 @@
   "runtime": "5.0",
   "logo": "Logo/logo.png",
   "idRange": {
-    "from": 70659924,
-    "to": 706599999
+    "from": 70759924,
+    "to": 707599999
   },
   "features": [
     "TranslationFile"
