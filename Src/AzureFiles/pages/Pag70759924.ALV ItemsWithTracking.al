@@ -2,7 +2,7 @@ page 70759924 "ALV ItemsWithTracking"
 {
     PageType = API;
     Caption = 'ALVItemsWithTracking';
-    APIPublisher = 'VRP';
+    APIPublisher = 'ALV';
     APIVersion = 'v2.0';
     APIGroup = 'ALV';
     EntityName = 'APP365ALVItem';
