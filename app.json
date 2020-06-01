@@ -1,9 +1,9 @@
 {
-  "id": "a7a49c61-7712-400a-9fc5-bc35f8e02af5",
-  "name": "Business Central Pepperi Connector App Sample",
+  "id": "a7a49c61-7712-400a-9fc5-bc35f8e02af8",
+  "name": "Business Central Pepperi Connector Sample",
   "publisher": "Alberto Valenti",
-  "brief": "Business Central Pepperi Connector App Sample",
-  "description": "Business Central Pepperi Connector App Sample",
+  "brief": "Business Central Pepperi Connector Sample",
+  "description": "Business Central Pepperi Connector Sample",
   "version": "3.0.0.16",
   "privacyStatement": "https://www.business-central.blog",
   "contextSensitiveHelpUrl": "https://www.business-central.blog",
