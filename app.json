@@ -1,15 +1,15 @@
 {
   "id": "a7a49c61-7712-400a-9fc5-bc35f8e02af8",
-  "name": "Business Central Pepperi Connector Sample",
+  "name": "Business Central Connector Sample",
   "publisher": "Alberto Valenti",
-  "brief": "Business Central Pepperi Connector Sample",
-  "description": "Business Central Pepperi Connector Sample",
+  "brief": "Business Central Connector Sample",
+  "description": "Business Central Connector Sample",
   "version": "3.0.0.16",
-  "privacyStatement": "https://www.business-central.blog",
-  "contextSensitiveHelpUrl": "https://www.business-central.blog",
-  "EULA": "https://www.business-central.blog",
-  "help": "https://www.business-central.blog",
-  "url": "https://www.business-central.blog",
+  "privacyStatement": "https://www.varprime.com",
+  "contextSensitiveHelpUrl": "https://www.varprime.com",
+  "EULA": "https://www.varprime.com",
+  "help": "https://www.varprime.com",
+  "url": "https://www.varprime.com",
   "capabilities": [],
   "platform": "15.0.0.0",
   "dependencies": [
@@ -27,11 +27,11 @@
     }
   ],
   "screenshots": [],
-  "runtime": "5.0",
+  "runtime": "4.2",
   "logo": "Logo/logo.png",
   "idRange": {
-    "from": 70759924,
-    "to": 707599999
+    "from": 70759900,
+    "to": 70759910
   },
   "features": [
     "TranslationFile"
